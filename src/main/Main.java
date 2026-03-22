@@ -11,10 +11,17 @@ public class Main{
         window.setResizable(false);
         // Nome da janela 2d advenure
         window.setTitle("2d adventure");
+       
+        GamePanel gamePanel = new GamePanel();
+        window.add(gamePanel);
+        window.pack();
         // Trazer a janela sempre para o meio da tela, null(ou seja não tem direção)
         window.setLocationRelativeTo(null);
         // Mostrar a janela
         window.setVisible(true);
+
+        gamePanel.startGameThread();
+
 
 
         
