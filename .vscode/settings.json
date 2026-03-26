@@ -1,0 +1,13 @@
+{
+    "java.project.sourcePaths": [
+        "main"
+    ],
+    "java.project.referencedLibraries": [],
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "/home/leilavargas/.vscode/extensions/redhat.java-1.53.0-linux-x64/jre/21.0.10-linux-x86_64",
+            "default": true
+        }
+    ]
+}

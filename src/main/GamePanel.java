@@ -1,5 +1,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements  Runnable{
@@ -32,6 +35,24 @@ public class GamePanel extends JPanel implements  Runnable{
     public void run(){
         while (gameThread != null) { 
             System.out.println("Jogo está rodando!");
-        }
+
+
+        // podemos atulizar o jogo de 30 a 60 frames por segundo
+        // Isso fara com que o personagem seja atulizado(posição, ação, ou etc..)
+        // para isso vamos criar 2 metodos:
+            update();//assim que atualizamos a tela 
+            repaint();
+        
     }
+}
+public void update(){
+
+}
+public void paintComponent(Graphics g){ // desenhar objetos na tela, e como um lapis ou pincel
+    super.paintComponent(g);
+    Graphics2D g2 = (Graphics2D)g;
+    g2.setColor(Color.white);
+    g2.fillRect(100, 100, tileSize, tileSize);
+    g2.dispose();
+}
 }
