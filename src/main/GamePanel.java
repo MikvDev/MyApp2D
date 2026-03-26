@@ -4,11 +4,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicComboBoxUI.KeyHandler;
 
 public class GamePanel extends JPanel implements  Runnable{
 
-    // Configurações da tela
+    // Configurações dad tela
     final int originalTileSize = 16; // 16 x 16
     final int scale = 3;
     final int tileSize = originalTileSize * scale; // 48x48
@@ -18,8 +17,9 @@ public class GamePanel extends JPanel implements  Runnable{
 
     final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     final int screenHeight = tileSize * maxScreenRow; 
+    int FPS = 60;
 
-    KeyHandler keyH = new KeyHandler();
+    KeyInput keyH = new KeyInput();
     Thread gameThread; // contador para o fps(frames por segundo)
 
     int playerX = 100, playerY = 100, playerSpeed = 4;
@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements  Runnable{
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); // Ajuda na renderização (performance)
-        this.addKeyListener(KeyH);
+        this.addKeyListener(keyH);
         this.setFocusable(true);
     }
 
@@ -41,8 +41,8 @@ public class GamePanel extends JPanel implements  Runnable{
     @Override
     public void run(){
         while (gameThread != null) { 
-            System.out.println("Jogo está rodando!");
-
+           // sleep medoth
+           double drawInterval = 1000000000/FPS; // usamos nanosegunodos para calcular
 
         // podemos atulizar o jogo de 30 a 60 frames por segundo
         // Isso fara com que o personagem seja atulizado(posição, ação, ou etc..)
@@ -55,8 +55,19 @@ public class GamePanel extends JPanel implements  Runnable{
 public void update(){
     if(keyH.upPressed == true){
         playerY -= playerSpeed; // vai diminuir do y para subir
-        playerY = playerY - playerSpeed;
+    }
+    else if(keyH.downPressed == true){
+        playerY += playerSpeed;
+
+        
         // min 14:40
+    }else if(keyH.leftPressed == true){// velocidade do jogador significa os pixeis, velocidade que ele avança 
+        playerX -= playerSpeed;
+
+ 
+    }else if(keyH.rightPressed == true){
+        playerX += playerSpeed;
+
     }
 
 }
