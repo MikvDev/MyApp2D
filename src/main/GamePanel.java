@@ -42,17 +42,31 @@ public class GamePanel extends JPanel implements  Runnable{
     public void run(){
         while (gameThread != null) { 
            // sleep medoth
-           double drawInterval = 1000000000/FPS; // usamos nanosegunodos para calcular
-
-        // podemos atulizar o jogo de 30 a 60 frames por segundo
+           double drawInterval = 1000000000/FPS; // usamos nanosegunodos para calcular, cada frame tera 16.66 milisegundos, ou 0,016 segundos de duração
+           
+           double nextDrawTime = System.nanoTime() + drawInterval; // tempo Atual + tempo do proximo frame 
+            
+           // podemos atulizar o jogo de 30 a 60 frames por segundo
         // Isso fara com que o personagem seja atulizado(posição, ação, ou etc..)
         // para isso vamos criar 2 metodos:
             update();//assim que atualizamos a tela 
-            repaint();
-        
+            repaint(); // vai desenhar a tela novamente com as instruções do update
+            try{
+               
+                double remainingTime = nextDrawTime - System.nanoTime();
+                remainingTime = remainingTime/1000000;
+                if(remainingTime < 0){
+                    remainingTime = 0; // travada que carrega o proximo frame em caso de erro,
+                }
+            Thread.sleep((long)remainingTime);
+            nextDrawTime =+ drawInterval;
+            }catch(InterruptedException e){
+                e.printStackTrace();
+
+            }
     }
 }
-public void update(){
+public void update(){ // vai calcuar a posição, colisoes e pontuações
     if(keyH.upPressed == true){
         playerY -= playerSpeed; // vai diminuir do y para subir
     }
